@@ -1,4 +1,4 @@
-# gfm builder
+# GFMBuilder
 
 This repository builds binary artifacts for the gfm project.
 This repository has a default .travis.yml file that can be used to build

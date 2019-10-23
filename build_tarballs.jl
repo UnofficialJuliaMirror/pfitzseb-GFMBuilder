@@ -14,14 +14,12 @@ sources = [
 
 # Bash recipe for building across all platforms
 script = raw"""
-cd $WORKSPACE/srcdir
-cd cmark-gfm/
+cd $WORKSPACE/srcdir/cmark-gfm
 mkdir build
 cd build
 cmake ../ -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain
 make
 make install
-
 """
 
 # These are the platforms we will build for by default, unless further
@@ -44,16 +42,15 @@ platforms = [
 
 # The products that we will ensure are always built
 products(prefix) = [
-    LibraryProduct(prefix, "libcmark-gfm-extensions", :gfm_extensions),
-    LibraryProduct(prefix, "libcmark-gfm", :gfm),
-    ExecutableProduct(prefix, "cmark-gfm", :gfm_binary)
+    LibraryProduct(prefix, "libcmark-gfm-extensions", :libgfm_extensions),
+    LibraryProduct(prefix, "libcmark-gfm", :libgfm),
+    ExecutableProduct(prefix, "cmark-gfm", :gfm)
 ]
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
-    
+
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
 build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies)
-
